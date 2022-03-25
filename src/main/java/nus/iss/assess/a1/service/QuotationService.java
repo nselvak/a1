@@ -25,8 +25,6 @@ import nus.iss.assess.a1.model.Quotation;
 @Service
 public class QuotationService {
 
-    String url = "https://quotation.chuklee.com/quotation";
-
     // Read in payload information 
     public PurchaseOrder readInfo(String payload) {
         PurchaseOrder po = new PurchaseOrder();
@@ -64,7 +62,7 @@ public class QuotationService {
 
         // Check
         System.out.println(">>>>> service end arraylist: " + endList);
-        
+
         // final addition
         po.setLineItems(endList);
         return po;
@@ -90,11 +88,14 @@ public class QuotationService {
 
         for(String i : items) {array.add(i);}
         JsonArray startArray = array.build();
+        // Check
+        System.out.println(">>>>> service end arraylist: " + startArray);
         
         // HTTP call
         RequestEntity<String> req = RequestEntity
-            .post(url)
+            .post("https://quotation.chuklee.com/quotation")
             .contentType(MediaType.APPLICATION_JSON)
+            .header("Accept", "application/json")
             .body(startArray.toString(), String.class);
 
         RestTemplate template = new RestTemplate();

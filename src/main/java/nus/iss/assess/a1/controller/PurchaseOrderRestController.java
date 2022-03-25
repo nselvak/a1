@@ -52,7 +52,7 @@ public class PurchaseOrderRestController {
 
             // Incremental price
             for(String i : items) {
-                total = total + po.getQuantity(i)*quote.get().getQuotation(i);
+                total = total + quote.get().getQuotation(i)*po.getQuantity(i);
                 // Check
                 System.out.println(">>>>> controller total: " + total);
             }
